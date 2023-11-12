@@ -12,7 +12,7 @@ public static class ContextConfigurations
         builder.Services.AddDbContext<AppDbContext>(options =>
         {
             options.ConfigureWarnings(warningsConfigurationBuilder => warningsConfigurationBuilder.Ignore(CoreEventId.PossibleIncorrectRequiredNavigationWithQueryFilterInteractionWarning));
-            options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
+            options.UseLazyLoadingProxies().UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
         });
 
         builder.Services.AddTransient<IAppDbContext, AppDbContext>();

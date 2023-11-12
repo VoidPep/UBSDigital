@@ -10,4 +10,7 @@ public interface IAppDbContext
     public DbSet<AnexoDaConsulta> AnexosDasConsultas { get; set; }
     public DbSet<Paciente> Pacientes { get; set; }
     public DbSet<UsuarioAmbulatorial> UsuariosAmbulatoriais { get; set; }
+
+    int SaveChanges();
+    Task<int> SaveChangesAsync();
 }

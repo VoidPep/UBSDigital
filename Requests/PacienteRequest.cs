@@ -1,10 +1,8 @@
-﻿using UBSDigital.Models.Consultas;
+﻿namespace UBSDigital.Requests;
 
-namespace UBSDigital.Models.Pacientes;
-
-public class Paciente
+public class PacienteRequest
 {
-    public Guid Id { get; set; }
+    public Guid? Id { get; set; }
     public string Nome { get; set; }
     public string Cpf { get; set; }
     public string Senha { get; set; }
@@ -15,6 +13,4 @@ public class Paciente
     public string? Complemento { get; set; }
     public string Cidade { get; set; }
     public string Uf { get; set; }
-
-    public virtual ICollection<Consulta> Consultas { get; set; } = new HashSet<Consulta>();
 }

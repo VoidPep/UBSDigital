@@ -36,7 +36,7 @@ namespace UBSDigital.Migrations
 
                     b.HasIndex("IdConsulta");
 
-                    b.ToTable("AnexosDasConsultas");
+                    b.ToTable("AnexosDasConsultas", (string)null);
                 });
 
             modelBuilder.Entity("UBSDigital.Models.Consultas.Consulta", b =>
@@ -69,7 +69,7 @@ namespace UBSDigital.Migrations
 
                     b.HasIndex("IdUsuarioAmbulatorial");
 
-                    b.ToTable("Consultas");
+                    b.ToTable("Consultas", (string)null);
                 });
 
             modelBuilder.Entity("UBSDigital.Models.Pacientes.Paciente", b =>
@@ -119,7 +119,7 @@ namespace UBSDigital.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Pacientes");
+                    b.ToTable("Pacientes", (string)null);
                 });
 
             modelBuilder.Entity("UBSDigital.Models.Pacientes.UsuarioAmbulatorial", b =>
@@ -142,7 +142,7 @@ namespace UBSDigital.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("UsuariosAmbulatoriais");
+                    b.ToTable("UsuariosAmbulatoriais", (string)null);
                 });
 
             modelBuilder.Entity("UBSDigital.Models.Consultas.AnexoDaConsulta", b =>

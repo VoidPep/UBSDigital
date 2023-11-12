@@ -12,7 +12,6 @@ public class ConsultaTypeConfiguration : IEntityTypeConfiguration<Consulta>
         builder.Property(x => x.Id).ValueGeneratedOnAdd();
 
         builder.HasOne(q => q.UsuarioAmbulatorial).WithMany(x => x.Consultas).HasForeignKey(q => q.IdUsuarioAmbulatorial);
-        builder.HasOne(q => q.Paciente).WithMany(x => x.Consultas).HasForeignKey(q => q.IdPaciente);
 
         builder.HasMany(q => q.Anexos).WithOne(q => q.Consulta).HasForeignKey(q => q.IdConsulta);
 

@@ -12,6 +12,8 @@ public class PacienteTypeConfiguration : IEntityTypeConfiguration<Paciente>
         builder.Property(x => x.Id).ValueGeneratedOnAdd();
 
         builder.HasMany(q => q.Consultas).WithOne(q => q.Paciente).HasForeignKey(q => q.IdPaciente);
+
+        builder.Property(q => q.Complemento).IsRequired(false);
     }
 }
 
