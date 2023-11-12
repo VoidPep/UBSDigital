@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using UBSDigital.Context;
 
@@ -10,9 +11,10 @@ using UBSDigital.Context;
 namespace UBSDigital.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231112212820_AlteracaoNosTiposDatabela")]
+    partial class AlteracaoNosTiposDatabela
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -25,6 +27,9 @@ namespace UBSDigital.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)");
 
+                    b.Property<Guid>("ConsultaId")
+                        .HasColumnType("char(36)");
+
                     b.Property<Guid>("IdConsulta")
                         .HasColumnType("char(36)");
 
@@ -34,7 +39,7 @@ namespace UBSDigital.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("IdConsulta");
+                    b.HasIndex("ConsultaId");
 
                     b.ToTable("AnexosDasConsultas");
                 });
@@ -57,17 +62,23 @@ namespace UBSDigital.Migrations
                     b.Property<Guid?>("IdUsuarioAmbulatorial")
                         .HasColumnType("char(36)");
 
+                    b.Property<Guid>("PacienteId")
+                        .HasColumnType("char(36)");
+
                     b.Property<string>("Parecer")
                         .HasColumnType("longtext");
 
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
+                    b.Property<Guid>("UsuarioAmbulatorialId")
+                        .HasColumnType("char(36)");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("IdPaciente");
+                    b.HasIndex("PacienteId");
 
-                    b.HasIndex("IdUsuarioAmbulatorial");
+                    b.HasIndex("UsuarioAmbulatorialId");
 
                     b.ToTable("Consultas");
                 });
@@ -91,6 +102,7 @@ namespace UBSDigital.Migrations
                         .HasColumnType("longtext");
 
                     b.Property<string>("Complemento")
+                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("Cpf")
@@ -149,7 +161,7 @@ namespace UBSDigital.Migrations
                 {
                     b.HasOne("UBSDigital.Models.Consultas.Consulta", "Consulta")
                         .WithMany("Anexos")
-                        .HasForeignKey("IdConsulta")
+                        .HasForeignKey("ConsultaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -160,13 +172,15 @@ namespace UBSDigital.Migrations
                 {
                     b.HasOne("UBSDigital.Models.Pacientes.Paciente", "Paciente")
                         .WithMany("Consultas")
-                        .HasForeignKey("IdPaciente")
+                        .HasForeignKey("PacienteId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("UBSDigital.Models.Pacientes.UsuarioAmbulatorial", "UsuarioAmbulatorial")
                         .WithMany("Consultas")
-                        .HasForeignKey("IdUsuarioAmbulatorial");
+                        .HasForeignKey("UsuarioAmbulatorialId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Paciente");
 
