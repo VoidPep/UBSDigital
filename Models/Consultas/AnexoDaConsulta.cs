@@ -1,10 +1,10 @@
-﻿using System.Reflection.Metadata.Ecma335;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
 namespace UBSDigital.Models.Consultas;
 
-public class AnexoDaCosnulta
+public class AnexoDaConsulta
 {
-
+    public Guid Id { get; set; }
     public Guid IdConsulta { get; set; }
     public string UrlAnexo { get; set; }
 

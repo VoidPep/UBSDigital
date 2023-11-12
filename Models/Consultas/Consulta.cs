@@ -1,5 +1,6 @@
-﻿using UBSDigital.Models.Enums;
-using UBSDigital.Models.Usuarios;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using UBSDigital.Models.Enums;
+using UBSDigital.Models.Pacientes;
 
 namespace UBSDigital.Models.Consultas;
 
@@ -9,11 +10,12 @@ public class Consulta
     public StatusDaConsulta Status { get; set; }
     public DateTime DataDaConsulta { get; set; }
     public string? Diagnostico { get; set; }
-    public string? PrescricoesMedicas { get; set; }
+    public string? Parecer { get; set; }
 
     public Guid IdPaciente { get; set; }
-    public Guid? IdMedico { get; set; }
+    public Guid? IdUsuarioAmbulatorial { get; set; }
 
-    public virtual Usuario Paciente { get; set; }
-    public virtual Usuario UsuarioAmbulatorial { get; set; }
+    public virtual Paciente Paciente { get; set; }
+    public virtual UsuarioAmbulatorial UsuarioAmbulatorial { get; set; }
+    public virtual ICollection<AnexoDaConsulta> Anexos { get; set; } = new HashSet<AnexoDaConsulta>();
 }
