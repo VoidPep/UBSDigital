@@ -36,6 +36,18 @@ public class ConsultasController : BaseApiController
     [HttpPost, Route("AtualizarConsulta")]
     public IActionResult AtualizarConsulta([FromBody] ConsultaRequest request)
     {
+        var consulta = _context.Consultas.Find(request.Id);
+
+        if (consulta == null)
+            return NotFound("Não encontrado.");
+
+        consulta.DataDeAtualizacao = DateTime.Now;
+
+        consulta.Status = request.Status;
+        consulta.IdUsuarioAmbulatorial = request.IdUsuarioAmbulatorial;
+        consulta.Parecer = request.Parecer;
+        consulta.Diagnostico = request.Diagnostico;
+
         return Ok();
     }
 
@@ -60,5 +72,25 @@ public class ConsultasController : BaseApiController
             return NotFound("Não encontrado");
 
         return Ok(consulta);
+    }
+
+    [HttpPost, Route("AdicionarAnexos")]
+    public IActionResult AdicionarAnexos([FromBody] AnexosRequest request)
+    {
+        var listaDeAnexosDaConsulta = new List<AnexoDaConsulta>();
+
+        foreach (var anexo in request.Anexos)
+        {
+            listaDeAnexosDaConsulta.Add(new AnexoDaConsulta
+            {
+                UrlAnexo = anexo.Url,
+                IdConsulta = anexo.IdConsulta
+            });
+        }
+
+        _context.AnexosDasConsultas.AddRange(listaDeAnexosDaConsulta);
+        _context.SaveChanges();
+
+        return Ok();
     }
 }

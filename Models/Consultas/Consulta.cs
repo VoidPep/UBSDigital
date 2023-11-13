@@ -8,7 +8,8 @@ public class Consulta
 {
     public Guid Id { get; set; }
     public StatusDaConsulta Status { get; set; }
-    public DateTime DataDaConsulta { get; set; }
+    public DateTime DataDeAtualizacao { get; set; }
+    public DateTime? DataDaConsulta { get; set; }
     public string? Diagnostico { get; set; }
     public string? Parecer { get; set; }
 
